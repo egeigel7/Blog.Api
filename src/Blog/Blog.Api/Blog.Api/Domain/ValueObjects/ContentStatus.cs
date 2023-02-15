@@ -1,6 +1,6 @@
 ﻿namespace Blog.Api.Domain.ValueObjects
 {
-    enum ContentStatus
+    public enum ContentStatus
     {
         Unpublished,
         Published,

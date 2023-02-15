@@ -1,15 +1,13 @@
 ﻿namespace Blog.Api.Domain.Events
 {
-    internal record ContentCreated
+    public record ContentCreated
     {
-        public ContentCreated(Guid id, string title, string body)
+        public ContentCreated(Guid id, string title)
         {
             Id = id;
             Title = title;
-            Body = body;
         }
         Guid Id { get; set; }
-        internal string Title { get; set; }
-        internal string Body { get; set; }
+        public string Title { get; set; }
     }
 }
