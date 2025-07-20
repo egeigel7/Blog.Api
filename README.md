@@ -1,5 +1,59 @@
 # Blog.Api
 
+## Endpoints
+
+### GET /blogs
+- **Description:** Returns all published blog content.
+- **Method:** GET
+- **Route:** /blogs
+- **Response:** 200 OK, JSON array of published blog posts. Each post includes:
+  - `id` (GUID)
+  - `title` (string)
+  - `body` (string)
+  - `status` (string, should be 'Published')
+  - `version` (integer)
+
+Example response:
+```json
+[
+  {
+    "id": "b1a2c3d4-e5f6-7890-abcd-1234567890ef",
+    "title": "My First Blog Post",
+    "body": "This is the content of the post.",
+    "status": "Published",
+    "version": 1
+  }
+]
+```
+
+### POST /createDraft
+- **Description:** Creates a new draft blog post.
+- **Method:** POST
+- **Route:** /createDraft
+- **Request Body:**
+```json
+{
+  "title": "string (required, max 200 chars)",
+  "body": "string (required)"
+}
+```
+- **Response:** 200 OK, GUID of the created draft post.
+
+### POST /saveContent
+- **Description:** Saves content for an existing draft blog post.
+- **Method:** POST
+- **Route:** /saveContent
+- **Request Body:**
+```json
+{
+  "id": "GUID (required)",
+  "content": "string (required)"
+}
+```
+- **Response:** 200 OK (no content)
+
+---
+
 ## Overview
 Blog.Api is a modern, event-sourced .NET API designed to showcase advanced software engineering practices, including Domain-Driven Design (DDD), SOLID principles, CQRS, and robust validation and error handling. The project is structured to demonstrate clean architecture, testability, and maintainability—qualities expected of a senior software engineer.
 
