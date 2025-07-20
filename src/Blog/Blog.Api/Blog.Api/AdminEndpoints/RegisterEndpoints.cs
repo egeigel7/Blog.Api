@@ -30,7 +30,7 @@ namespace Blog.Api.AdminEndpoints
             {
                 await _handler.HandleAsync(new SaveContentCommand(saveContentRequest), cancellation);
             })
-            .WithName("saveContent");
+            .WithName("SaveContent");
 
             return endpoints;
         }
