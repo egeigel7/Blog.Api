@@ -9,5 +9,6 @@
 
     public interface IContentRepository : IRepository<Entities.Aggregates.Content, Guid>
     {
+        Task<List<Entities.Aggregates.Content>> GetAllAsync(CancellationToken cancellationToken = default);
     }
 }

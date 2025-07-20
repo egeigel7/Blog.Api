@@ -8,6 +8,7 @@ using Microsoft.Extensions.Options;
 using Weasel.Core;
 using FluentValidation.AspNetCore;
 using Hellang.Middleware.ProblemDetails;
+using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -32,6 +32,16 @@ namespace Blog.Api.AdminEndpoints
             })
             .WithName("SaveContent");
 
+            endpoints.MapGet("/blogs", async (
+                [FromServices] IContentRepository repository,
+                CancellationToken cancellation) =>
+            {
+                var allContent = await repository.GetAllAsync(cancellation);
+                var published = allContent.Where(c => c.Status == Blog.Api.Domain.ValueObjects.ContentStatus.Published).ToList();
+                return Results.Ok(published);
+            })
+            .WithName("GetBlogs");
+
             return endpoints;
         }
     }
