@@ -6,6 +6,8 @@ using Blog.Api.Domain.Entities.Aggregates;
 using Marten;
 using Microsoft.Extensions.Options;
 using Weasel.Core;
+using FluentValidation.AspNetCore;
+using Hellang.Middleware.ProblemDetails;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +17,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<ICommandHandlerAsync<CreateDraftCommand, Guid>, CreateDraftCommandHandler>();
 builder.Services.AddScoped<ICommandHandlerAsync<SaveContentCommand>, SaveContentCommandHandler>();
+builder.Services.AddScoped<IContentRepository, ContentRepository>();
+builder.Services.AddFluentValidationAutoValidation();
+builder.Services.AddProblemDetails();
 
 builder.Services.AddMarten(opts =>
 {
@@ -40,6 +45,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseProblemDetails();
 
 //app.MapGet("/getAllContent", () =>
 //{

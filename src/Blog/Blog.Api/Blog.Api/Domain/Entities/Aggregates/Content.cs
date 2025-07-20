@@ -1,24 +1,32 @@
 ﻿using Blog.Api.Domain.Events;
 using Blog.Api.Domain.ValueObjects;
-using Marten.Events.Aggregation;
 
 namespace Blog.Api.Domain.Entities.Aggregates
 {
-    public class Content: SingleStreamAggregation<Entities.Content>
+    public class Content
     {
-        public Content()
+        // Parameterless constructor for serialization/framework
+        public Content() { }
+
+        // Constructor for easy creation
+        public Content(Guid id, string title, string body, ContentStatus status)
         {
+            Id = id;
+            Title = title;
+            Body = body;
+            Status = status;
         }
 
-        internal Content(ContentCreated contentCreated)
-                    {
+        // Apply methods for event sourcing
+        public void Apply(ContentCreated contentCreated)
+        {
             Title = contentCreated.Title;
             Status = ContentStatus.Unpublished;
         }
 
         public Guid Id { get; set; }
-        public string Title { get; set; }
-        public string Body { get; set; }
+        public string Title { get; set; } = string.Empty;
+        public string Body { get; set; } = string.Empty;
         public ContentStatus Status { get; set; }
         public int Version { get; set; }
 
